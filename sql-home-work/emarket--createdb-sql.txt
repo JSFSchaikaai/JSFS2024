@@ -1,0 +1,49 @@
+CREATE DATABASE emarket
+    WITH
+    OWNER = root
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'en_US.UTF-8'
+    LC_CTYPE = 'en_US.UTF-8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+CREATE TABLE IF NOT EXISTS public.buyer
+(
+    id_buyer integer NOT NULL DEFAULT nextval('buyer_id_buyer_seq'::regclass),
+    firstname character varying COLLATE pg_catalog."default",
+    lastname character varying COLLATE pg_catalog."default",
+    CONSTRAINT buyer_pkey PRIMARY KEY (id_buyer)
+)
+
+
+CREATE TABLE IF NOT EXISTS public.products
+(
+    id_product integer NOT NULL DEFAULT nextval('products_product_id_seq'::regclass),
+    name character varying COLLATE pg_catalog."default" NOT NULL,
+    description character varying COLLATE pg_catalog."default",
+    price numeric NOT NULL,
+    CONSTRAINT products_pkey PRIMARY KEY (id_product)
+)
+
+
+CREATE TABLE IF NOT EXISTS public.orders
+(
+    id_order integer NOT NULL DEFAULT nextval('order_id_order_seq'::regclass),
+    id_buyer integer NOT NULL,
+    id_product integer NOT NULL,
+    payment boolean NOT NULL DEFAULT false,
+    delivery boolean NOT NULL DEFAULT false,
+    CONSTRAINT order_pkey PRIMARY KEY (id_order),
+    CONSTRAINT order_id_buyer_fkey FOREIGN KEY (id_buyer)
+        REFERENCES public.buyer (id_buyer) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT orders_id_product_fkey FOREIGN KEY (id_product)
+        REFERENCES public.products (id_product) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
