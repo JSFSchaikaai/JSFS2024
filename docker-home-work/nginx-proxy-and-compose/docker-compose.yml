@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  backend:
+    image: my-web-server:latest
+    ports:
+      - "3000:3000"
+
+  my-nginx-proxy:
+    image: my-nginx-proxy
+    ports:
+      - "8000:8000"
