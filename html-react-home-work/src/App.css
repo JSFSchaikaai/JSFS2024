@@ -1,0 +1,30 @@
+#root {
+  padding-top:   10px;
+  padding-left:  30px;
+  padding-right: 30px;
+}
+.head-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: self-start; 
+}
+
+
+.head-panel-lefs {
+  display: flex;
+  flex-direction: row;
+}
+
+.head-panel-right {
+  display: flex;
+  flex-direction: row;
+}
+
+.param {
+  display: grid;
+  grid-template-columns: 100px 300px;
+  grid-column-gap: 50px;
+  padding-top: 15px;
+}
+
